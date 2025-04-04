@@ -19,10 +19,12 @@ describe('Box', () => {
     render(
       <Box bleed={true} info={true}>
         Test Box
-        {conditionalVariable && <div>abc123</div>}
+        {!conditionalVariable && <div>abc123</div>}
+        {conditionalVariable && <div>def456</div>}
       </Box>,
     );
     expect(screen.getByText('abc123')).toBeInTheDocument();
+    expect(screen.queryByText('def456')).not.toBeInTheDocument();
   });
 
   test('renders Box component with correct classes when bleed is true', () => {
